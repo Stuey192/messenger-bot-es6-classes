@@ -1,0 +1,24 @@
+{
+  "name": "messenger-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stuey192/messenger-bot-es6-classes.git"
+  },
+  "author": "Stuey Kent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stuey192/messenger-bot-es6-classes/issues"
+  },
+  "homepage": "https://github.com/Stuey192/messenger-bot-es6-classes#readme",
+  "devDependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "request": "^2.81.0"
+  }
+}

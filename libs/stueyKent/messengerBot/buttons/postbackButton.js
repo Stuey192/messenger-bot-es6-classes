@@ -17,4 +17,4 @@ class PostbackButton extends Button {
     return obj;
   }
 }
-  module.exports = PostbackButton;
+module.exports = PostbackButton;

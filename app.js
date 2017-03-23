@@ -11,6 +11,12 @@ let MediaAttachment = require("./libs/stueyKent/messengerBot/mediaAttachment");
 let ButtonTemplate = require("./libs/stueyKent/messengerBot/templates/buttonTemplate");
 let Element = require("./libs/stueyKent/messengerBot/element");
 
+let Server = require("./libs/stueyKent/expressServer/server");
+
+
+
+let server = new Server();
+server.init();
 
 let recipient = new Recipient('123456');
 
@@ -40,4 +46,4 @@ let element = new Element("Title goes here", "subtitle, subtitle, subtitle...", 
 
 let elements = [];
 
-console.log(element.object)
+//console.log(element.object)
