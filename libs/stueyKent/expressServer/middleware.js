@@ -1,8 +1,9 @@
+
 class Middleware  {
   constructor() {}
 
   call(req, res, next){
-    console.log("Something is happening!!!");
+    //console.log('Something is happening.');
     next();
   }
 }
