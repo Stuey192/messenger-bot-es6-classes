@@ -1,17 +1,17 @@
-const Recipient = require("../messengerBot/recipient");
-const Message = require("../messengerBot/message");
-const QuickReply = require("../messengerBot/quickReply");
-const MediaAttachment = require("../messengerBot/mediaAttachment");
-const Element = require("../messengerBot/element");
-const Request = require("../messengerBot/request");
-const CallButton = require("../messengerBot/buttons/callButton");
-const UrlButton = require("../messengerBot/buttons/urlButton");
-const PostbackButton = require("../messengerBot/buttons/postbackButton");
-const ShareButton = require("../messengerBot/buttons/shareButton");
+const Recipient = require("../libs/stueyKent/messengerBot/recipient");
+const Message = require("../libs/stueyKent/messengerBot/message");
+const QuickReply = require("../libs/stueyKent/messengerBot/quickReply");
+const MediaAttachment = require("../libs/stueyKent/messengerBot/mediaAttachment");
+const Element = require("../libs/stueyKent/messengerBot/element");
+const Request = require("../libs/stueyKent/messengerBot/request");
+const CallButton = require("../libs/stueyKent/messengerBot/buttons/callButton");
+const UrlButton = require("../libs/stueyKent/messengerBot/buttons/urlButton");
+const PostbackButton = require("../libs/stueyKent/messengerBot/buttons/postbackButton");
+const ShareButton = require("../libs/stueyKent/messengerBot/buttons/shareButton");
 
-const ButtonTemplate = require("../messengerBot/templates/buttonTemplate");
-const GenericTemplate = require("../messengerBot/templates/genericTemplate");
-const ListTemplate = require("../messengerBot/templates/listTemplate");
+const ButtonTemplate = require("../libs/stueyKent/messengerBot/templates/buttonTemplate");
+const GenericTemplate = require("../libs/stueyKent/messengerBot/templates/genericTemplate");
+const ListTemplate = require("../libs/stueyKent/messengerBot/templates/listTemplate");
 
 const MessengerBotRequestService = require("../services/messengerBotRequestService");
 

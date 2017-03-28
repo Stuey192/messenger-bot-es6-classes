@@ -3,7 +3,7 @@ var Request = require('request');
 class MessengerBotWhiteListService {
   static makeRequest(domains) {
     Request({
-      url: 'https://graph.facebook.com/v2.6/me/messages',
+      url: 'https://graph.facebook.com/v2.6/me/thread_settings',
       qs: {
         access_token: process.env.page_token
       },
@@ -12,6 +12,12 @@ class MessengerBotWhiteListService {
         setting_type: 'domain_whitelisting',
         whitelisted_domains: domains,
         domain_action_type: "add"
+      }
+    }, function (error, response, body) {
+      if (error) {
+        console.log('Error sending message: ', error);
+      } else if (response) {
+        console.log(body);
       }
     });
   }
