@@ -30,10 +30,12 @@ class ButtonTemplate extends Attachment {
       }
     }
 
-    if (this._buttons.length) {
-      obj.payload.buttons = this._buttons.map((button) => {
-        return button.object;
-      });
+    if (this._buttons) {
+      if (this._buttons.length) {
+        obj.payload.buttons = this._buttons.map((button) => {
+          return button.object;
+        });
+      }
     }
 
     return obj;

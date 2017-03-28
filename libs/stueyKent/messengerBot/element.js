@@ -1,9 +1,9 @@
 /*
-  title has a 80 character limit
-  subtitle has a 80 character limit
-  buttons is limited to 3
-  Image ratio is 1.91:1
-*/
+ title has a 80 character limit
+ subtitle has a 80 character limit
+ buttons is limited to 3
+ Image ratio is 1.91:1
+ */
 
 class Element {
   constructor(title, subtitle, imageUrl, defaultAction, buttons) {
@@ -51,10 +51,13 @@ class Element {
       obj.default_action = this._defaultAction.object;
     }
 
-    if (this._buttons.length) {
-      obj.buttons = this._buttons.map((button) => {
-        return button.object;
-      });
+
+    if (this._buttons) {
+      if (this._buttons.length) {
+        obj.buttons = this._buttons.map((button) => {
+          return button.object;
+        });
+      }
     }
 
     return obj;
