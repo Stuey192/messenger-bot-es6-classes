@@ -5,7 +5,7 @@ const path = require('path');
 //const StaticRouter = require("./libs/stueyKent/expressServer/staticRouter");
 
 //imports
-const MessengerBotMenuService = require("./services/messengerBotMenuService");
+const MessengerBotMenuService = require("./services/menuService");
 const PostbackButton = require("./libs/stueyKent/messengerBot/buttons/postbackButton");
 
 
@@ -14,6 +14,7 @@ const WebhookRouter = require("./libs/stueyKent/expressServer/webhookRouter");
 const Server = require("./libs/stueyKent/expressServer/server");
 
 const MessengerBotController = require('./controllers/messengerBotController');
+const DynamicMessengerBotController = require('./controllers/dynamicMessengerBotController');
 
 
 //not needed routers
@@ -22,7 +23,11 @@ const MessengerBotController = require('./controllers/messengerBotController');
 
 //MessengerBotMenuService.setMenu([new PostbackButton("help", "MENU_HELP")]);
 
-let controller = new MessengerBotController();
+//let controller = new MessengerBotController();
+
+const data = require("./data/data.json");
+
+let controller = new DynamicMessengerBotController(data);
 
 let middleware = new Middleware();
 let webhookRouter = new WebhookRouter(middleware, controller);

@@ -1,0 +1,30 @@
+{
+  "textInputs": [
+    {
+      "text": "Hi",
+      "replies": [
+        {
+          "type": "TEXT",
+          "text": "Hej, Hola, Kon'nichiwa"
+        },
+        {
+          "type": "QUICK_REPLY",
+          "text": "Pick a colour:",
+          "quick_replies": [
+            {
+              "text": "Red"
+            },
+            {
+              "text": "Green"
+            },
+            {
+              "text": "Blue"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "attachmentsInputs": [],
+  "postbacks": []
+}

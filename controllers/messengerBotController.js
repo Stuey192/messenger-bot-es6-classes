@@ -13,8 +13,8 @@ const ButtonTemplate = require("../libs/stueyKent/messengerBot/templates/buttonT
 const GenericTemplate = require("../libs/stueyKent/messengerBot/templates/genericTemplate");
 const ListTemplate = require("../libs/stueyKent/messengerBot/templates/listTemplate");
 
-const MessengerBotRequestService = require("../services/messengerBotRequestService");
-const MessengerBotGetUserDetailsService = require("../services/messengerBotGetUserDetailsService");
+const MessengerBotRequestService = require("../services/requestService");
+const MessengerBotGetUserDetailsService = require("../services/userDetailsService");
 
 class MessengerBotController {
   constructor() {
