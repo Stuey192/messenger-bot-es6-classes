@@ -20,7 +20,7 @@ const MessengerBotController = require('./controllers/messengerBotController');
 //let apiRouter = new ApiRouter(middleware, [controller]);
 //let staticRouter = new StaticRouter(path.join(__dirname, 'public'), middleware);
 
-MessengerBotMenuService.setMenu([new PostbackButton("help", "MENU_HELP")]);
+//MessengerBotMenuService.setMenu([new PostbackButton("help", "MENU_HELP")]);
 
 let controller = new MessengerBotController();
 

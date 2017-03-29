@@ -14,6 +14,7 @@ const GenericTemplate = require("../libs/stueyKent/messengerBot/templates/generi
 const ListTemplate = require("../libs/stueyKent/messengerBot/templates/listTemplate");
 
 const MessengerBotRequestService = require("../services/messengerBotRequestService");
+const MessengerBotGetUserDetailsService = require("../services/messengerBotGetUserDetailsService");
 
 class MessengerBotController {
   constructor() {
@@ -42,10 +43,14 @@ class MessengerBotController {
 
   handleText(recipient, text) {
     console.log('message:', text);
-    let message;
+    let messages = [];
 
     if (text === "Hi") {
-      message = new Message("Hej, Hola, Kon'nichiwa", null, null, "");
+      messages.push(new Message("Hej, Hola, Kon'nichiwa", null, null, ""));
+      /*let attachment = new MediaAttachment("image", "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg")
+      messages.push(new Message(null, attachment, null, ""));
+      messages.push(new Message("Test 1", null, null, ""));
+      messages.push(new Message("Test 2", null, null, ""));*/
     }
 
     if (text === "Quick replies") {
@@ -53,12 +58,12 @@ class MessengerBotController {
         new QuickReply(QuickReply.contetTypes.text, "Green", "ColourChosen"),
         new QuickReply(QuickReply.contetTypes.text, "Blue", "ColourChosen")];
 
-      message = new Message("Pick a colour:", null, quickReplies, "");
+      messages.push(new Message("Pick a colour:", null, quickReplies, ""));
     }
 
     if (text === "Attachment") {
       let attachment = new MediaAttachment("image", "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg")
-      message = new Message(null, attachment, null, "");
+      messages.push(new Message(null, attachment, null, ""));
     }
 
     if (text === "Buttons") {
@@ -67,14 +72,14 @@ class MessengerBotController {
        new PostbackButton("Postback Button", "DEVELOPER_DEFINED_PAYLOAD")];
 
       let buttonTemplate = new ButtonTemplate("Hello World", buttons)
-      message = new Message(null, buttonTemplate, null, "");
+      messages.push(new Message(null, buttonTemplate, null, ""));
     }
 
     if(text === "Element") {
       let elements = [new Element("Title goes here", "subtitle, subtitle, subtitle...", "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg", new UrlButton(null, "http://www.google.com"), null)];
 
       let genericTemplate = new GenericTemplate(elements);
-      message = new Message(null, genericTemplate, null, "");
+      messages.push(new Message(null, genericTemplate, null, ""));
     }
 
     if(text === "Elements") {
@@ -85,7 +90,7 @@ class MessengerBotController {
       ];
 
       let genericTemplate = new GenericTemplate(elements);
-      message = new Message(null, genericTemplate, null, "");
+      messages.push(new Message(null, genericTemplate, null, ""));
     }
 
     if(text === "List") {
@@ -96,13 +101,12 @@ class MessengerBotController {
       ];
 
       let listTemplate = new ListTemplate(ListTemplate.topElementStyles.large, elements, new PostbackButton("Postback Button", "DEVELOPER_DEFINED_PAYLOAD"));
-      message = new Message(null, listTemplate, null, "");
+      messages.push(new Message(null, listTemplate, null, ""));
     }
 
 
-    if (message) {
-      let request = new Request(recipient, message);
-      MessengerBotRequestService.makeRequest(request.object);
+    if (messages .length > 0) {
+      this.makeRequest(recipient, messages);
     }
   }
 
@@ -112,6 +116,37 @@ class MessengerBotController {
 
   handlePostback(recipient, postback) {
     console.log('postback:', postback);
+
+    let messages = [];
+
+    if(postback.payload === 'Get Started Buttton Pressed') {
+      MessengerBotGetUserDetailsService.getUserDetails(recipient.recipientId).then((response) => {
+        messages.push(new Message("Hi " + response.first_name, null, null, ""));
+        this.makeRequest(recipient, messages);
+      });
+    }
+
+    if (messages.length > 0) {
+      this.makeRequest(recipient, messages);
+    }
+  }
+
+  makeRequest(recipient, messages){
+    let requests = [];
+    for (let i = 0; i < messages.length; i++) {
+      requests.push(new Request(recipient, messages[i]));
+    }
+
+    const promiseSerial = funcs =>
+      funcs.reduce((promise, func) =>
+          promise.then(result => func().then(Array.prototype.concat.bind(result))),
+        Promise.resolve([]));
+
+    const funcs = requests.map(request => () => MessengerBotRequestService.makeRequest(request.object))
+
+    promiseSerial(funcs)
+      .then(console.log)
+      .catch(console.error)
   }
 }
 
