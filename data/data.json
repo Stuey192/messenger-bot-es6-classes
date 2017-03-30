@@ -5,12 +5,12 @@
       "replies": [
         {
           "type": "TEXT",
-          "text": "Hej, Hola, Kon'nichiwa"
+          "text": "Hej, Hola, Kon'nichiwa {{first_name}}"
         },
         {
           "type": "QUICK_REPLY",
           "text": "Pick a colour:",
-          "quick_replies": [
+          "quickReplies": [
             {
               "text": "Red"
             },
@@ -23,8 +23,179 @@
           ]
         }
       ]
+    },
+    {
+      "text": "Image",
+      "replies": [
+        {
+          "type": "ATTACHMENT",
+          "attachmentType": "image",
+          "url": "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg"
+        }
+      ]
+    },
+    {
+      "text": "Buttons",
+      "replies": [
+        {
+          "type": "BUTTON_TEMPLATE",
+          "text": "Hello World",
+          "buttons": [
+            {
+              "type": "URL",
+              "url": "http://www.google.com",
+              "size": "compact",
+              "text": "URL Button"
+            },
+            {
+              "type": "CALL",
+              "text": "Call Button",
+              "number": "+447791065397"
+            },
+            {
+              "type": "POSTBACK",
+              "text": "Postback Button",
+              "payload": "PAYLOAD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "Generic",
+      "replies": [
+        {
+          "type": "GENERIC_TEMPLATE",
+          "elements": [
+            {
+              "title": "Title number 1",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg",
+              "action": {
+                "url": "http://www.google.com",
+                "size": "compact"
+              },
+              "buttons": []
+            },
+            {
+              "title": "Title number 2",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://www.petscorner.co.uk/petopedia/wp-content/uploads/header-kittens.jpg",
+              "action": {
+                "url": "http://www.facebook.com",
+                "size": "compact"
+              },
+              "buttons": [
+                {
+                  "type": "URL",
+                  "url": "http://www.facebook.com",
+                  "size": "compact",
+                  "text": "URL Button"
+                }
+              ]
+            },
+            {
+              "title": "Title number 3",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-30-57b30ad41bc90__605.jpg",
+              "action": {
+                "url": "http://www.twitter.com",
+                "size": "compact"
+              },
+              "buttons": [
+                {
+                  "type": "SHARE"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "text": "List",
+      "replies": [
+        {
+          "type": "LIST_TEMPLATE",
+          "topElementStyle": "large",
+          "elements": [
+            {
+              "title": "Title number 1",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://cdn3-www.cattime.com/assets/uploads/2011/08/best-kitten-names-1.jpg",
+              "action": {
+                "url": "http://www.google.com",
+                "size": "compact"
+              },
+              "buttons": []
+            },
+            {
+              "title": "Title number 2",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://www.petscorner.co.uk/petopedia/wp-content/uploads/header-kittens.jpg",
+              "action": {
+                "url": "http://www.facebook.com",
+                "size": "compact"
+              },
+              "buttons": [
+                {
+                  "type": "URL",
+                  "url": "http://www.facebook.com",
+                  "size": "compact",
+                  "text": "URL Button"
+                }
+              ]
+            },
+            {
+              "title": "Title number 3",
+              "subtitle": "Subtitle. subtitle, subtitle...",
+              "imageUrl": "http://static.boredpanda.com/blog/wp-content/uploads/2016/08/cute-kittens-30-57b30ad41bc90__605.jpg",
+              "action": {
+                "url": "http://www.twitter.com",
+                "size": "compact"
+              },
+              "buttons": [
+                {
+                  "type": "SHARE"
+                }
+              ]
+            }
+          ],
+          "button": {
+            "type": "POSTBACK",
+            "text": "Postback Button",
+            "payload": "PAYLOAD"
+          }
+        }
+      ]
     }
   ],
   "attachmentsInputs": [],
-  "postbacks": []
+  "postbacks": [
+    {
+      "payload": "Get Started Buttton Pressed",
+      "replies": [
+        {
+          "type": "BUTTON_TEMPLATE",
+          "text": "Hello World",
+          "buttons": [
+            {
+              "type": "POSTBACK",
+              "text": "Postback Button",
+              "payload": "HELLO_WORLD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "payload": "HELLO_WORLD",
+      "replies": [
+        {
+          "type": "TEXT",
+          "text": "Testing, testing, testing..."
+        }
+      ]
+    }
+  ]
 }

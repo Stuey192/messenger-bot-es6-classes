@@ -1,15 +1,15 @@
-
 const Request = require("../libs/stueyKent/messengerBot/request");
 const Recipient = require("../libs/stueyKent/messengerBot/recipient");
 
 
-const MessageFactory = require("../services/messageFactory")
+const MessageFactory = require("../services/messageFactory");
 const MessengerBotRequestService = require("../services/requestService");
 const MessengerBotGetUserDetailsService = require("../services/userDetailsService");
 
 class DynamicMessengerBotController {
   constructor(data) {
     this._data = data;
+    this._userData = {};
   }
 
   MessageReceived(messaging) {
@@ -36,17 +36,18 @@ class DynamicMessengerBotController {
   handleText(recipient, text) {
     console.log('message:', text);
     let messages = [];
+    let userDetails = this._userData[recipient.recipientId];
 
-    for(let input of this._data.textInputs) {
-     if(text === input.text) {
-       messages = input.replies.map((reply) => {
-        return MessageFactory.getMessage(reply);
-       });
-       break;
-     }
+    for (let input of this._data.textInputs) {
+      if (text === input.text) {
+        messages = input.replies.map((reply) => {
+          return MessageFactory.getMessage(reply, userDetails);
+        });
+        break;
+      }
     }
 
-    if (messages .length > 0) {
+    if (messages.length > 0) {
       this.makeRequest(recipient, messages);
     }
   }
@@ -58,21 +59,27 @@ class DynamicMessengerBotController {
   handlePostback(recipient, postback) {
     console.log('postback:', postback);
 
-    let messages = [];
+    MessengerBotGetUserDetailsService.getUserDetails(this._userData, recipient.recipientId)
+      .then((data, userDetails) => {
+        this._userData = data;
+        let messages = [];
 
-    if(postback.payload === 'Get Started Buttton Pressed') {
-      MessengerBotGetUserDetailsService.getUserDetails(recipient.recipientId).then((response) => {
-        //messages.push(new Message("Hi " + response.first_name, null, null, ""));
-        this.makeRequest(recipient, messages);
+        for (let input of this._data.postbacks) {
+          if (postback.payload === input.payload) {
+            messages = input.replies.map((reply) => {
+              return MessageFactory.getMessage(reply, userDetails);
+            });
+            break;
+          }
+        }
+
+        if (messages.length > 0) {
+          this.makeRequest(recipient, messages);
+        }
       });
-    }
-
-    if (messages.length > 0) {
-      this.makeRequest(recipient, messages);
-    }
   }
 
-  makeRequest(recipient, messages){
+  makeRequest(recipient, messages) {
     let requests = [];
     for (let i = 0; i < messages.length; i++) {
       requests.push(new Request(recipient, messages[i]));
@@ -83,10 +90,12 @@ class DynamicMessengerBotController {
           promise.then(result => func().then(Array.prototype.concat.bind(result))),
         Promise.resolve([]));
 
-    const funcs = requests.map(request => () => MessengerBotRequestService.makeRequest(request.object))
+    const funcs = requests.map(request => () => MessengerBotRequestService.makeRequest(request.object));
 
     promiseSerial(funcs)
-      .then(console.log)
+      .then(()=>{
+        //console.log(this._userData)
+      })
       .catch(console.error)
   }
 }
