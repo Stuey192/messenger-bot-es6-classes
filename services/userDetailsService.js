@@ -7,7 +7,7 @@ class GetUserDetailsService {
       let userDetails = userData[userId];
 
       if(userDetails){
-        resolve(userData, userDetails);
+        resolve(userData);
       } else {
         Request({
           url: 'https://graph.facebook.com/v2.6/' + userId,
@@ -23,9 +23,8 @@ class GetUserDetailsService {
             if(body.error){
               console.log('Error: ', response.body.error);
             } else {
-              let data = JSON.parse(body);
-              userData[userId] = data;
-              resolve(userData, data);
+              userData[userId] = JSON.parse(body);
+              resolve(userData);
             }
           }
         });

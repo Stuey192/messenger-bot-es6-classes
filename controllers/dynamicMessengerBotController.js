@@ -60,9 +60,11 @@ class DynamicMessengerBotController {
     console.log('postback:', postback);
 
     GetUserDetailsService.getUserDetails(this._userData, recipient.recipientId)
-      .then((data, userDetails) => {
-        this._userData = data;
+      .then((userData) => {
+        this._userData = userData;
         let messages = [];
+
+        let userDetails =  this._userData[recipient.recipientId];
 
         for (let input of this._data.postbacks) {
           if (postback.payload === input.payload) {
