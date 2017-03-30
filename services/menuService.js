@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotMenuService {
+class MenuService {
   static setMenu(buttons) {
 
     let callToActions = buttons.map((button) => {
@@ -27,4 +27,4 @@ class MessengerBotMenuService {
     });
   }
 }
-module.exports = MessengerBotMenuService;
+module.exports = MenuService;

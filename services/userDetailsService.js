@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotGetUserDetailsService {
+class GetUserDetailsService {
   static getUserDetails(userData, userId) {
     return new Promise(function (resolve, reject) {
 
@@ -33,4 +33,4 @@ class MessengerBotGetUserDetailsService {
     });
   }
 }
-module.exports = MessengerBotGetUserDetailsService;
+module.exports = GetUserDetailsService;

@@ -3,8 +3,8 @@ const Recipient = require("../libs/stueyKent/messengerBot/recipient");
 
 
 const MessageFactory = require("../services/messageFactory");
-const MessengerBotRequestService = require("../services/requestService");
-const MessengerBotGetUserDetailsService = require("../services/userDetailsService");
+const RequestService = require("../services/requestService");
+const GetUserDetailsService = require("../services/userDetailsService");
 
 class DynamicMessengerBotController {
   constructor(data) {
@@ -59,7 +59,7 @@ class DynamicMessengerBotController {
   handlePostback(recipient, postback) {
     console.log('postback:', postback);
 
-    MessengerBotGetUserDetailsService.getUserDetails(this._userData, recipient.recipientId)
+    GetUserDetailsService.getUserDetails(this._userData, recipient.recipientId)
       .then((data, userDetails) => {
         this._userData = data;
         let messages = [];
@@ -90,7 +90,7 @@ class DynamicMessengerBotController {
           promise.then(result => func().then(Array.prototype.concat.bind(result))),
         Promise.resolve([]));
 
-    const funcs = requests.map(request => () => MessengerBotRequestService.makeRequest(request.object));
+    const funcs = requests.map(request => () => RequestService.makeRequest(request.object));
 
     promiseSerial(funcs)
       .then(()=>{

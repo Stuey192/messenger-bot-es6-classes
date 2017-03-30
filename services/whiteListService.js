@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotWhiteListService {
+class WhiteListService {
   static makeRequest(domains) {
     Request({
       url: 'https://graph.facebook.com/v2.6/me/thread_settings',
@@ -22,4 +22,4 @@ class MessengerBotWhiteListService {
     });
   }
 }
-module.exports = MessengerBotWhiteListService;
+module.exports = WhiteListService;

@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotGetStartedService {
+class GetStartedService {
   static getStarted(payload) {
     Request({
       url: 'https://graph.facebook.com/v2.6/me/thread_settings',
@@ -26,4 +26,4 @@ class MessengerBotGetStartedService {
     });
   }
 }
-module.exports = MessengerBotGetStartedService;
+module.exports = GetStartedService;

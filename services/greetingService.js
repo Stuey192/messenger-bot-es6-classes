@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotGreetingService {
+class GreetingService {
   static greeting(text) {
     Request({
       url: 'https://graph.facebook.com/v2.6/me/thread_settings',
@@ -24,4 +24,4 @@ class MessengerBotGreetingService {
     });
   }
 }
-module.exports = MessengerBotGreetingService;
+module.exports = GreetingService;

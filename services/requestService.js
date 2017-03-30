@@ -1,6 +1,6 @@
 var Request = require('request');
 
-class MessengerBotRequestService {
+class RequestService {
   static makeRequest(request) {
 
     return new Promise(function (resolve, reject) {
@@ -25,7 +25,7 @@ class MessengerBotRequestService {
     });
   }
 }
-module.exports = MessengerBotRequestService;
+module.exports = RequestService;
 
 
 

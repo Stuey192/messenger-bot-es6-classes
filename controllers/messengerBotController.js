@@ -13,8 +13,8 @@ const ButtonTemplate = require("../libs/stueyKent/messengerBot/templates/buttonT
 const GenericTemplate = require("../libs/stueyKent/messengerBot/templates/genericTemplate");
 const ListTemplate = require("../libs/stueyKent/messengerBot/templates/listTemplate");
 
-const MessengerBotRequestService = require("../services/requestService");
-const MessengerBotGetUserDetailsService = require("../services/userDetailsService");
+const RequestService = require("../services/requestService");
+const GetUserDetailsService = require("../services/userDetailsService");
 
 class MessengerBotController {
   constructor() {
@@ -120,7 +120,7 @@ class MessengerBotController {
     let messages = [];
 
     if(postback.payload === 'Get Started Buttton Pressed') {
-      MessengerBotGetUserDetailsService.getUserDetails(recipient.recipientId).then((response) => {
+      GetUserDetailsService.getUserDetails(recipient.recipientId).then((response) => {
         messages.push(new Message("Hi " + response.first_name, null, null, ""));
         this.makeRequest(recipient, messages);
       });
@@ -142,7 +142,7 @@ class MessengerBotController {
           promise.then(result => func().then(Array.prototype.concat.bind(result))),
         Promise.resolve([]));
 
-    const funcs = requests.map(request => () => MessengerBotRequestService.makeRequest(request.object))
+    const funcs = requests.map(request => () => RequestService.makeRequest(request.object))
 
     promiseSerial(funcs)
       .then(console.log)
